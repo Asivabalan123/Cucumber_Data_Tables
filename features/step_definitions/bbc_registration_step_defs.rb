@@ -21,41 +21,15 @@ When("I input my DOB") do
   dob_page.click_continue
 end
 
-When(/^I input the necessary details with the password details a@(.*)$/) do |password|
-    @password = password
-    registration_page.input_email
-    registration_page.input_postcodes
-    registration_page.input_password("#{password}")
-    sleep 3
-    registration_page.select_gender
-    registration_page.no_updates
-    registration_page.click_register
+When(/^I input the necessary details with the password details (.*)$/) do |password|
+  registration_page.input_email
+  registration_page.input_postcodes
+  registration_page.input_password(password)
+  registration_page.select_gender
+  registration_page.no_updates
+  registration_page.click_register
 end
 
-Then("I receive the corresponding error Sorry, that password is too short. It needs to be eight characters or more.") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I input the necessary details with the password details abcd{int}") do |int|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I receive the corresponding error Sorry, that password isn{string}s hard to guess.") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I input the necessary details with the password details abcdefgh") do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I receive the corresponding error Sorry, that password isn{string}t a letter.") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When("I input the necessary details with the password details {int}") do |int|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then("I receive the corresponding error Sorry, that password isn't valid. Please include a letter.") do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I receive the corresponding error (.*)$/) do |error|
+  expect(registration_page.get_error_message).to eq error
 end

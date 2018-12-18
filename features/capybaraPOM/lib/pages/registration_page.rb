@@ -5,7 +5,7 @@ class BbcRegistration
   include Capybara::DSL
 
   PASSWORD_INPUT = 'password-input'
-  ERROR_MESSGAE = '#form-message-password'
+  ERROR_INPUT = '//*[@id="form-message-password"]'
   INPUT_EMAIL = 'user-identifier-input'
   INPUT_POSTCODES = 'postcode-input'
   GENDER = 'gender'
@@ -31,12 +31,11 @@ class BbcRegistration
     find(:xpath, NO_THANKS).click
   end
 
-  def click_register_button
+  def click_register
     find("button[id='submit-button']").click
   end
 
-  def get_error_message(error)
-    find(ERROR_INPUT).text
+  def get_error_message
+    find(:xpath, ERROR_INPUT).text
   end
-
 end
