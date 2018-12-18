@@ -10,16 +10,26 @@ When("I proceed to register") do
   sign_in.click_register
 end
 
-And("I select I am over 13") do
+And("I select I am over {int}") do |int|
   age_page.click_over_13
 end
 
 When("I input my DOB") do
-  pending # Write code here that turns the phrase above into concrete actions
+  dob_page.input_day
+  dob_page.input_month
+  dob_page.input_year
+  dob_page.click_continue
 end
 
-When("I input the necessary details with the password details a@{int}") do |int|
-  pending # Write code here that turns the phrase above into concrete actions
+When(/^I input the necessary details with the password details a@(.*)$/) do |password|
+    @password = password
+    registration_page.input_email
+    registration_page.input_postcodes
+    registration_page.input_password("#{password}")
+    sleep 3
+    registration_page.select_gender
+    registration_page.no_updates
+    registration_page.click_register
 end
 
 Then("I receive the corresponding error Sorry, that password is too short. It needs to be eight characters or more.") do

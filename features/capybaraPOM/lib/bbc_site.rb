@@ -3,6 +3,7 @@ require_relative 'pages/bbc_sign_up'
 require_relative 'pages/sign_in'
 require_relative 'pages/age_page'
 require_relative 'pages/dob_page'
+require_relative 'pages/registration_page'
 
 module BbcSite
 
@@ -24,6 +25,10 @@ module BbcSite
 
   def dob_page
     BbcDOB.new
+  end
+
+  def registration_page
+    BbcRegistration.new
   end
 
 end
